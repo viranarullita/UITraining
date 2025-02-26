@@ -35,5 +35,16 @@ namespace UITraining.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Delete(int Id)
+        {
+            var deleteProduct = _interface.DeleteProduct(Id);
+            if (deleteProduct)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest("Gagal menghapus produk!");
+        }
     }
 }
