@@ -36,11 +36,10 @@ namespace UITraining.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Delete(int Id)
         {
-            var delProduct = _interface.DeleteProduct(Id); 
-            if (delProduct)
+            var deleteProduct = _interface.DeleteProduct(Id);
+            if (deleteProduct)
             {
                 return RedirectToAction(nameof(Index));
             }
