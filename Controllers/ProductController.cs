@@ -39,12 +39,12 @@ namespace UITraining.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            var deleteProduct = _interface.DeleteProduct(Id);
-            if (deleteProduct)
+            var delProduct = _interface.DeleteProduct(Id); 
+            if (delProduct)
             {
                 return RedirectToAction(nameof(Index));
             }
-            return BadRequest("Gagal menghapus produk!");
+            return BadRequest("Gagal menghapus data produk!");
         }
     }
 }

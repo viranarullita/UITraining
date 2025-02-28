@@ -58,7 +58,8 @@ namespace UITraining.Services
                 return false;
             }
 
-            _context.Products.Remove(product);
+            product.ProductStatus = ProductStatus.deleted; 
+            _context.Products.Update(product);
             _context.SaveChanges();
             return true;
         }
