@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UITraining.Interfaces;
 using UITraining.Models.DB;
+using UITraining.Models.DTO;
 
 namespace UITraining.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProduct _interface;
+        private readonly ISupplier _supplier;
 
-        public ProductController(IProduct interfaces)
+        public ProductController(IProduct interfaces, ISupplier supplier)
         {
             _interface = interfaces;
+            _supplier = supplier;
         }
 
         public IActionResult Index()
@@ -21,17 +24,29 @@ namespace UITraining.Controllers
 
         public IActionResult Edit(int Id)
         {
+            ViewBag.Supplier = _supplier.Suppliers();
             var product = _interface.GetProductById(Id);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductDTO product)
         {
-            var EditProduct = _interface.EditProduct(product);
-            if (EditProduct)
+            if (product.Id == 0)
             {
-                return RedirectToAction(nameof(Index));
+                var addProduct = _interface.AddProduct(product);
+                if (addProduct)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                var EditProduct = _interface.EditProduct(product);
+                if (EditProduct)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View();
         }

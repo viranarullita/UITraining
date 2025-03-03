@@ -23,10 +23,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Add New Product</h5>
                         <form asp-controller="Product" asp-action="Edit" method="post">
-                            <div class="row mb-3">
+                            <div class="row mb-3" hidden>
                                 <label for="Id" class="col-sm-2 col-form-label">Id</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="Id" asp-for="Id" hidden>
+                                    <input type="text" class="form-control" id="Id" asp-for="Id">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -38,7 +38,7 @@
                             <div class="row mb-3">
                                 <label for="Stock" class="col-sm-2 col-form-label">Stock</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="Stock" asp-for="Stock">
+                                    <input type="number" class="form-control" id="Stock" asp-for="Stock">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -51,6 +51,14 @@
                                 <label for="Price" class="col-sm-2 col-form-label">Price</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="Price" asp-for="Price">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="Supplier" class="col-sm-2 col-form-label">Supplier</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="IdSupplier" asp-items="ViewBag.Supplier">
+                                        <option value="">-- Pilih Supplier --</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
