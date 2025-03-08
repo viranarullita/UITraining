@@ -1,0 +1,70 @@
+﻿@using UITraining.Models.DTO
+@model List<SupplierDTO>
+@{
+	ViewData["Title"] = "Supplier";
+}
+<main id="main" class="main">
+
+	<div class="pagetitle">
+		<h1>Data Tables</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+				<li class="breadcrumb-item">Tables</li>
+				<li class="breadcrumb-item active">Data</li>
+			</ol>
+		</nav>
+	</div><!-- End Page Title -->
+
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Supplier</h5>
+
+						<a href="@Url.Action("Edit","Supplier")" class="btn btn-info">Add Supplier</a>
+						<!-- Table with stripped rows -->
+						<table class="table datatable">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>
+										<b>N</b>ame
+									</th>
+									<th>SupplierAddress</th>
+									<th>Status</th>
+									<th>Action</th>
+									@* <th data-type="date" data-format="YYYY/DD/MM">Start Date</th> *@
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var data in Model)
+								{
+									<tr>
+										<td>@data.Id</td>
+										<td>@data.SupplierName</td>
+										<td>@data.SupplierAddress</td>
+										<td>@data.SupplierStatus</td>
+										<td class="d-flex gap-2">
+											<a href="@Url.Action("Edit", "Supplier", new {id = @data.Id})" class="btn btn-sm btn-info">Update</a>
+											<form method="post" action="@Url.Action("Delete", "Supplier")" onsubmit="return confirm('Apakah Anda yakin ingin menghapus Supplier ini?');">
+												<input type="hidden" name="Id" value="@data.Id" />
+												<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+											</form>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+						<!-- End Table with stripped rows -->
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+</main><!-- End #main -->
